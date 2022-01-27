@@ -1,0 +1,41 @@
+html {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("https://wallpaperaccess.com/full/429865.jpg");
+}
+
+.container {
+  margin: auto;
+  width: 85%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  border: white solid 1px;
+  padding: 50px;
+  background: linear-gradient(red 40%, gray 10%, green 40%);
+}
+
+button {
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+input:hover {
+  transform: translateX(0.5px);
+  border: black solid 1px;
+}
+
+input {
+  padding: 5px;
+  border-radius: 5px;
+}
