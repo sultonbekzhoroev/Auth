@@ -1,26 +1,56 @@
-const form = document.querySelector("#form");
-const formFilds = form.elements;
+window.addEventListener("load", function () {
+  var id = localStorage.getItem("id");
+  if (!id) {
+    console.log("yok");
+    localStorage.setItem("id", 0);
+  } else {
+    id = Number(id);
+  }
+  const form = document.querySelector("#form");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
 
-const buttonIn = document.querySelector("#sign-in");
+  document.getElementById("btn-login").addEventListener("click", login);
 
-buttonIn.addEventListener("click", () => {
-  localStorage.clear();
+  function login(e) {
+    e.preventDefault();
+    var button = this;
+    var data = {
+      email: emailInput.value,
+      password: passwordInput.value,
+      admin: "Sultan",
+    };
+    if (validation(data)) {
+      var check;
+      for (let i = 0; i < id; i++) {
+        const element = localStorage.getItem(`email${i}`);
+        if (element == data.email) {
+          check = true;
+          console.log("var");
+        }
+      }
+      if (!check) {
+        console.log("yok", data.email);
+        localSet();
+      }
+    } else {
+      alert("email or password not valid!");
+    }
+
+    // alert("user already exist");
+  }
+
+  function localSet() {
+    localStorage.setItem("id", id++);
+    localStorage.setItem(`email${id}`, emailInput.value);
+    localStorage.setItem(`password${id}`, passwordInput.value);
+  }
+
+  function validation(data) {
+    //mail
+    const mailformat =
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return mailformat.test(data.email);
+    //password
+  }
 });
-
-for (let i = 0; i < formFilds.length; i++) {
-  formFilds[i].addEventListener("change", changeHandler);
-}
-
-function changeHandler() {
-  localStorage.setItem(this.name, this.value);
-}
-
-// function checkStorage() {
-//     for (let i = 0; i < formFilds.length; i++){
-//         if (formFilds[i].type !== 'submit') {
-//             if (formFilds[i].type === 'name') {
-//                 formFilds[i].name = localStorage.getItem(formFilds[i].name)
-//             }
-//         }
-//     }
-// }
