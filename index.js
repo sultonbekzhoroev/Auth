@@ -1,5 +1,5 @@
 window.addEventListener("load", function () {
-  var id = localStorage.getItem("id");
+  let id = localStorage.getItem("id");
   if (!id) {
     console.log("yok");
     localStorage.setItem("id", 0);
@@ -14,14 +14,14 @@ window.addEventListener("load", function () {
 
   function login(e) {
     e.preventDefault();
-    var button = this;
-    var data = {
+    let button = this;
+    let data = {
       email: emailInput.value,
       password: passwordInput.value,
       admin: "Sultan",
     };
     if (validation(data)) {
-      var check;
+      let check;
       for (let i = 0; i < id; i++) {
         const element = localStorage.getItem(`email${i}`);
         if (element == data.email) {
